@@ -1,0 +1,70 @@
+import time
+
+listino_ogg = {
+    1: "Caffè",
+    2: "Cappuccino",
+    3: "The",
+    4: "Cioccolata",
+    5: "Caffè latte",
+    6: "Latte",
+    7: "Cacao",
+    8: "Macha",
+    9: "Bastoncino"
+}
+listino_prezz = {
+    "Caffè": "10",
+    "Cappuccino": "15",
+    "The": "8",
+    "Cioccolata": "12",
+    "Caffè latte": "15",
+    "Latte": "6",
+    "Cacao": "8",
+    "Macha": "18",
+    "Bastoncino": "2"
+}
+
+print("Salve! Ecco la scelta:")
+for i in range(9):
+    print(f"Digita {i + 1} se vuoi selezionare {listino_ogg[i + 1]}")
+codice = int(input(">"))
+
+def check_cod(codice):
+    if codice < 1 or codice > 9:
+        print("Codice sconosciuto!")
+    else:
+        return True
+
+
+def selezione(codice, approvazione):
+    if not approvazione:
+        print("Re inserire codice!")
+        return False
+    else:
+        print(f"Hai selezionato {listino_ogg[codice]}, al solo costo di {listino_prezz[listino_ogg[codice]]} centesimi.")
+        return True
+
+
+def pagamento():
+    pag = input(f"Inserire {listino_prezz[listino_ogg[codice]]} centesimi: ")
+    if pag == listino_prezz[listino_ogg[codice]]:
+        print("Grazie per il pagamento!")
+        time.sleep(1)
+        return True
+    else:
+        return False
+
+
+while True:
+    z = selezione(codice, check_cod(codice))
+    if not z:
+        codice = int(input(">"))
+        continue
+    else:
+        break
+while True:
+    if pagamento():
+        print("\nI hope you liked it! \nSee you soon!")
+        break
+    else:
+        print("Soldi sbagliati!")
+        pagamento()
